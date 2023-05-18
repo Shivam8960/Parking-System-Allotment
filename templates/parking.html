@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Total Parkings{% endblock title %}
+{% block body %}
+<div class="container mt-5">
+    <table class="table text-center">
+        <thead class="table-success">
+            <tr>
+                <th scope="col">S.no</th>
+                <th scope="col">Vehicle Number</th>
+                <th scope="col">Vehicle Type</th>
+                <th scope="col">Vehicle Entry</th>
+                <th scope="col">₹ Total Price</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% comment %}
+            <!-- Run for loop and iterate through all the items --> {% endcomment %}
+            {% for vehicle in vehicles %}
+            <tr class="text-capitalize">
+                <th scope="row">{{forloop.counter}}</th>
+                <td class="text-uppercase"><b>{{vehicle.state}}{{vehicle.vehicle_no}}</b></td>
+                <td>{{vehicle.vehicle_type}}</td>
+                <td>{{vehicle.park_date}}</td>
+                <td>{{vehicle.bills}}</td>
+                <td>
+                    <a href="{% url 'downloadReciept' vehicle.vehicle_id %}" type="button" onclick="exitTime()" class="btn btn-warning">
+                        <i class="fas fa-print"></i></a>
+                    <!-- Remove button -->
+                    <a href="{% url 'deleteData' vehicle.vehicle_id %}" type="button" class="btn btn-danger"><i class="fas fa-trash"></i>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock body %}

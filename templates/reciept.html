@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet" />
+    <!-- html2pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <title>Reciept | ParkSync</title>
+</head>
+{% block body %}
+
+<div class="container mt-5 w-50">
+    <div class="card" id="inVoice">
+        <div class="d-inline">
+        <img src="https://cdn3.iconfinder.com/data/icons/car-indicator-lights-icons/512/Warning_Light-16-512.png"
+            height="55" width="55" class="mx-5 mt-3" alt="Parking Logo" loading="lazy" />
+            <span class="h4 mt-5">ParkSync</span></div>
+        <p class="mx-5">Alambagh, Kanpur Road, Lucknow | 226005 </p>
+        <div class="card-body">
+            <table class="table">
+                <tbody style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
+                    <tr>
+                        <th>Vehicle No.:</th>
+                        <th>{{vehicle.state}}{{vehicle.vehicle_no|upper}}</th>
+
+                    </tr>
+                    <tr>
+                        <th>Vehicle Type:</th>
+                        <th>{{vehicle.vehicle_type}}</th>
+                    </tr>
+                    <tr>
+                        <th>Entry Time:</th>
+                        <th>{{vehicle.park_date}}</th>
+                    </tr>
+                    <tr>
+                        <th>Exit Time:</th>
+                        <th>{{vehicle.date_till}}</th>
+                    </tr>
+                    <tr>
+                        <th>Total Price:</th>
+                        <th>{{vehicle.bills}}/-</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button type="button" onclick="generatePDF()" class="btn btn-success">Print &emsp13; <i
+                class="fas fa-print"></i></button>
+    </div>
+</div>
+
+<script>
+    const generatePDF = () => {
+        const element = document.getElementById("inVoice");
+        html2pdf()
+            .from(element)
+            .save("Reciept");
+    }
+</script>
+
+{% endblock body %}
+
+</html>
